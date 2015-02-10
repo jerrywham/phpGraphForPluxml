@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<title><![CDATA[phpGraph]]></title>
+	<author><![CDATA[Cyril Maguire]]></author>
+	<version>1.0</version>
+	<date>02/02/2015</date>
+	<site>http://www.ecyseo.com</site>
+	<description><![CDATA[Permet l'affichage de graphiques svg dans les articles]]></description>
+	<requirements></requirements>
+</document>
