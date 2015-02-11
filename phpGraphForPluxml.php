@@ -3,8 +3,8 @@
  * Plugin phpGraphForPluxml
  *
  * @package	PLX
- * @version	1.0
- * @date	03/02/2015
+ * @version	1.1
+ * @date	11/02/2015
  * @author	Cyril MAGUIRE
  **/
 
@@ -206,7 +206,7 @@ class phpGraphForPluxml extends plxPlugin {
 			foreach ($tooltipLegendNoSpace as $tooltips => $arrayOfTooltips) {
 				$t = str_replace($tooltipLegendNoSpace[$tooltips], $tooltipLegendSpaces[$tooltips], $t);
 			}
-			
+
 			if(preg_match_all('/\[graph\]\[data\](.*)\[\/data\](\[options\](.*)\[\/options\])?\[\/graph\]/Ui', $t, $matches)) {
 				foreach ($matches[0] as $key => $m) {
 					$id = md5($m.$id.$type);
