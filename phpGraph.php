@@ -13,11 +13,11 @@
 #    |	/				  \	 |	  |	   |	|			|
 #    |/____________________\_|____|____|____|___________|
 #
-# @update     2015-02-03
+# @update     2015-02-11
 # @copyright  2013-2015 Cyril MAGUIRE
 # @licence    http://www.cecill.info/licences/Licence_CeCILL_V2.1-fr.txt CONTRAT DE LICENCE DE LOGICIEL LIBRE CeCILL version 2.1
 # @link       http://jerrywham.github.io/phpGraph/
-# @version    1.3
+# @version    1.4
 #
 # ------------------- END LICENSE BLOCK -------------------
 /**
@@ -281,7 +281,9 @@ class phpGraph {
 				}
 			} else {
 				$i = 1;
+				$oldId = $id;
 				foreach ($data as $line => $datas) {
+					$id = $oldId.'-'.$line;
 					if (!isset($type[$line]) && !is_string($type) && is_numeric($line)) {
 						$type[$line] = 'line';
 					}
