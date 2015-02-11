@@ -17,7 +17,7 @@
 # @copyright  2013-2015 Cyril MAGUIRE
 # @licence    http://www.cecill.info/licences/Licence_CeCILL_V2.1-fr.txt CONTRAT DE LICENCE DE LOGICIEL LIBRE CeCILL version 2.1
 # @link       http://jerrywham.github.io/phpGraph/
-# @version    1.4
+# @version    1.5
 #
 # ------------------- END LICENSE BLOCK -------------------
 /**
