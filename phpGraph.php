@@ -1576,8 +1576,17 @@ class phpGraph {
 	 * @author Cyril MAGUIRE
 	 */
 	public function svg2vml($svg,$vml,$root,$xsl='vendors/svg2vml/svg2vml.xsl',$xslpath='/svg2vml/') {
+
+			$vide = '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink">
+<head>
+<title>phpGraph</title>
+<style>v\:* {behavior:url(#default#VML);}</style>
+</head>
+<body/>
+</html>';
+		$plxMotor = plxMotor::getInstance();
 		include_once 'svg2vml/xslt.php';
-		if(is_string($svg)){
+		if(is_string($svg) && !is_file($root.$vml)){
 			$xsl = str_replace('include href="XSL2', 'include href="'.$xslpath.'XSL2', file_get_contents($xsl));
 			# for $xsl, see http://vectorconverter.sourceforge.net/index.html
 			$xml_contents=$svg;
@@ -1596,23 +1605,38 @@ class phpGraph {
 			$result=xslt_process($xh, 'arg:/_xml', 'arg:/_xsl', NULL, $arguments);
 			xslt_free($xh);
 
-			if ($result) {
+			
+			if ($result && trim($result) != $vide) {
 			    $result = str_replace('<?xml version="1.0"?>'."\n", '', $result);
 			    $result = str_replace('><',">\n<",$result);
     			file_put_contents($root.$vml, $result);
-    			$output = "<div class=\"object\"><object type=\"text/html\" data=\"".$root.$vml."\" >";
+    			$output = "<div class=\"object\"><object type=\"text/html\" data=\"".str_replace('./data', 'data', $plxMotor->urlRewrite($root.$vml))."\" >";
     			$output .= "</object></div>\n";
     			$output = $this->wmodeTransparent($output);
     			return $output;
 			} else {
 				$f = str_replace(array('.html',PLX_PHPGRAPH),array('.png',PLX_PHPGRAPH_IMG),$root.$vml);
 				if (is_file($f)) {
-					$plxMotor = plxMotor::getInstance();
-					return '<img src="'.$plxMotor->urlRewrite($f).'" alt="graph" />';
+					return '<img src="'.$plxMotor->urlRewrite($f).'" alt="graph" class="svgFallback"/>';
+				} else {
+					return false;
 				}
 			}
 		} else{
-			return L_ERROR_FILE_NOT_FOUND;
+			if(!is_string($svg)) {
+				return L_ERROR_FILE_NOT_FOUND;
+			} else {
+				if (trim(file_get_contents($root.$vml)) != $vide) {
+					return "<div class=\"object\"><object type=\"text/html\" data=\"".str_replace('./data', 'data', $plxMotor->urlRewrite($root.$vml))."\" ></object></div>\n";
+				} else {
+					$f = str_replace(array('.html',PLX_PHPGRAPH),array('.png',PLX_PHPGRAPH_IMG),$root.$vml);
+					if (is_file($f)) {
+						return '<img src="'.$plxMotor->urlRewrite($f).'" alt="graph" class="svgFallback" />';
+					} else {
+						return false;
+					}
+				}
+			}
 		}
 	}
 
