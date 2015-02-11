@@ -1223,6 +1223,29 @@ donnera :</p>
 <h3><em>Nota Bene</em> :</h3>
 <p>Mis à part sur cette aide où le code n'est pas produit par la bibliothèque, les svg générés par le plugin sont exportables en png via un javascript automatiquement ajouté en bas de page, pour les navigateurs récents.<br/><br/></p>
 <p>Pour les navigateurs anciens (IE &lt; 10 ), une tentative de conversion des svg en vml est réalisée.<br/>Si la conversion échoue, le plugin affichera soit une zone blanche, soit un png, s'il a préalablement été généré via un navigateur récent.<br/><br/></p>
+<p>Pour améliorer l'affichage sur IE, je vous conseille d'ajouter le css suivant dans la partie "Code CSS -> Contenu fichier css site :" du panneau d'administration des plugins :</p>
+<pre>
+@media screen and (min-width:0\0) {
+     svg {
+        width:600px;
+        height:600px;
+     }
+    .object {
+        width:600px;
+        height:600px;
+       scroll:none;
+    }
+    .object object {
+       position:relative;
+       width:100%;
+       height:100%;
+       scroll:none;
+    }
+   img.svgFallback {
+        max-width:200%;
+        margin-left:-50%;
+    }
+}</pre>
 <p>Le mieux étant quand même de conseiller à vos utilisateurs de télécharger un navigateur digne de ce nom.</p>
 <h3>À vous de jouer !</h3>
 <p>N'hésitez pas à remonter les bugs que vous trouverez au niveau du <a href="https://www.github.com/jerrywham/phpGraphForPluxml" onclick="window.open(this.href);return false;">plugin</a> ou de la <a href="https://www.github.com/jerrywham/phpGraph" onclick="window.open(this.href);return false;">bibliothèque de génération des svg</a></p>
