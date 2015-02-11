@@ -181,7 +181,7 @@ class phpGraphForPluxml extends plxPlugin {
 
 			if (!is_dir(PLX_PHPGRAPH)) {
 	            mkdir(PLX_PHPGRAPH,0705);
-	            file_put_contents(PLX_PHPGRAPH.'/.htaccess',"Allow from none\nDeny from all\n", LOCK_EX);
+	            //file_put_contents(PLX_PHPGRAPH.'/.htaccess',"Allow from none\nDeny from all\n", LOCK_EX);
 	        }
 	        if (!is_dir(PLX_PHPGRAPH_IMG)) {
 	            mkdir(PLX_PHPGRAPH_IMG,0705);
@@ -206,7 +206,7 @@ class phpGraphForPluxml extends plxPlugin {
 			foreach ($tooltipLegendNoSpace as $tooltips => $arrayOfTooltips) {
 				$t = str_replace($tooltipLegendNoSpace[$tooltips], $tooltipLegendSpaces[$tooltips], $t);
 			}
-
+			
 			if(preg_match_all('/\[graph\]\[data\](.*)\[\/data\](\[options\](.*)\[\/options\])?\[\/graph\]/Ui', $t, $matches)) {
 				foreach ($matches[0] as $key => $m) {
 					$id = md5($m.$id.$type);

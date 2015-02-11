@@ -17,7 +17,7 @@
 # @copyright  2013-2015 Cyril MAGUIRE
 # @licence    http://www.cecill.info/licences/Licence_CeCILL_V2.1-fr.txt CONTRAT DE LICENCE DE LOGICIEL LIBRE CeCILL version 2.1
 # @link       http://jerrywham.github.io/phpGraph/
-# @version    1.4
+# @version    1.5
 #
 # ------------------- END LICENSE BLOCK -------------------
 /**
@@ -1627,7 +1627,7 @@ class phpGraph {
 				return L_ERROR_FILE_NOT_FOUND;
 			} else {
 				if (trim(file_get_contents($root.$vml)) != $vide) {
-					return "<div class=\"object\"><object type=\"text/html\" data=\"".str_replace('./data', 'data', $plxMotor->urlRewrite($root.$vml))."\" ></object></div>\n";
+					return "<div class=\"object\"><object type=\"text/html\" data=\"".$plxMotor->urlRewrite($root.$vml)."\" ></object></div>\n";
 				} else {
 					$f = str_replace(array('.html',PLX_PHPGRAPH),array('.png',PLX_PHPGRAPH_IMG),$root.$vml);
 					if (is_file($f)) {
